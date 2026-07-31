@@ -18,7 +18,7 @@ export const workingMomRequests = pgTable("working_mom_requests", {
     .default(sql`'{}'::text[]`),
   specialRequests: text("special_requests"),
   inquiry: text("inquiry"),
-});
+}).enableRLS();
 
 export const seniorApplications = pgTable("senior_applications", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -34,4 +34,4 @@ export const seniorApplications = pgTable("senior_applications", {
     .array()
     .notNull()
     .default(sql`'{}'::text[]`),
-});
+}).enableRLS();
