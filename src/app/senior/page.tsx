@@ -4,91 +4,15 @@ import { useActionState, useState } from "react";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { submitSeniorApplication, type SeniorFormState } from "./actions";
-
-const AGE_GROUP_OPTIONS = ["40대", "50대", "60대", "70대 이상"];
-
-const CAREER_LENGTH_OPTIONS = ["5년 미만", "5~10년", "10~15년", "15~20년", "20년 이상"];
-
-const JOB_TYPE_OPTIONS = [
-  "일반사무직",
-  "대기업",
-  "공무원",
-  "교사",
-  "전문직",
-  "육아돌봄시터",
-  "기타",
-];
-
-const PREFERRED_SERVICE_OPTIONS = [
-  "긴급돌봄",
-  "단기돌봄",
-  "단순 교육 제공 가능 (학교숙제, 독서 등)",
-];
+import {
+  AGE_GROUP_OPTIONS,
+  CAREER_LENGTH_OPTIONS,
+  JOB_TYPE_OPTIONS,
+  PREFERRED_SERVICE_OPTIONS,
+} from "./options";
+import { MultiSelectGroup, SingleSelectGroup } from "./SelectGroups";
 
 const initialState: SeniorFormState = { status: "idle" };
-
-function SingleSelectGroup({
-  options,
-  selected,
-  onSelect,
-  columns = 4,
-}: {
-  options: string[];
-  selected: string | null;
-  onSelect: (value: string) => void;
-  columns?: number;
-}) {
-  return (
-    <div
-      className="mt-3 grid gap-2"
-      style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
-    >
-      {options.map((option) => (
-        <button
-          type="button"
-          key={option}
-          onClick={() => onSelect(option)}
-          className={`rounded-lg border px-3 py-2 text-sm font-semibold transition-colors ${
-            selected === option
-              ? "border-teal-600 bg-teal-50 text-teal-700"
-              : "border-zinc-300 text-zinc-600 hover:border-zinc-400"
-          }`}
-        >
-          {option}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-function MultiSelectGroup({
-  options,
-  selected,
-  onToggle,
-}: {
-  options: string[];
-  selected: string[];
-  onToggle: (value: string) => void;
-}) {
-  return (
-    <div className="mt-3 flex flex-wrap gap-2">
-      {options.map((option) => (
-        <button
-          type="button"
-          key={option}
-          onClick={() => onToggle(option)}
-          className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
-            selected.includes(option)
-              ? "border-teal-600 bg-teal-600 text-white"
-              : "border-zinc-300 bg-white text-zinc-600 hover:border-zinc-400"
-          }`}
-        >
-          {option}
-        </button>
-      ))}
-    </div>
-  );
-}
 
 export default function SeniorPage() {
   const [ageGroup, setAgeGroup] = useState<string | null>(null);

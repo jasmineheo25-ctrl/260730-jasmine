@@ -4,10 +4,7 @@ import { useActionState, useState } from "react";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { submitWorkingMomRequest, type WorkingMomFormState } from "./actions";
-
-type ServiceType = "emergency" | "short";
-
-const CARE_SCOPE_OPTIONS = ["학교·학원 픽업", "가정돌봄", "숙제지원 및 기타"];
+import { CARE_SCOPE_OPTIONS, SERVICE_TYPE_OPTIONS, type ServiceType } from "./options";
 
 const initialState: WorkingMomFormState = { status: "idle" };
 
@@ -140,12 +137,7 @@ export default function WorkingMomPage() {
                 시터 서비스 종류 <span className="text-rose-600">*</span>
               </label>
               <div className="mt-3 grid grid-cols-2 gap-3">
-                {(
-                  [
-                    { value: "emergency", label: "긴급돌봄" },
-                    { value: "short", label: "단기돌봄" },
-                  ] as { value: ServiceType; label: string }[]
-                ).map((option) => (
+                {SERVICE_TYPE_OPTIONS.map((option) => (
                   <button
                     type="button"
                     key={option.value}
