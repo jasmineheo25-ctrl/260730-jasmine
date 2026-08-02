@@ -24,6 +24,8 @@ npm run db:studio     # open Drizzle Studio against DATABASE_URL
 
 There is no test suite configured.
 
+Requires a `.env` (gitignored) with `DATABASE_URL` set to the Supabase transaction-pooler connection string — `src/db/index.ts` throws immediately if it's missing, which breaks `dev`, `build`, and every `db:*` command.
+
 ## Architecture
 
 - **Next.js App Router**, single root layout at [src/app/layout.tsx](src/app/layout.tsx). No nested layouts — each route page renders its own `<SiteHeader />`.
